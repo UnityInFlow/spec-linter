@@ -1,6 +1,6 @@
 {
   "name": "@unityinflow/spec-linter",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Lint CLAUDE.md and AI spec files — catches missing sections, secrets, and context bloat",
   "type": "module",
   "main": "./dist/index.js",

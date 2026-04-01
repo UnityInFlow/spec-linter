@@ -2,6 +2,49 @@
 
 > Lint CLAUDE.md and AI spec files — catches missing sections, secrets, and context bloat.
 
+## The Problem
+
+CLAUDE.md, GEMINI.md, and AI spec files are written by hand with zero validation. Common mistakes:
+
+- Missing required sections — the agent builds the wrong thing
+- Accidentally committed API keys — security breach waiting to happen
+- 80kb spec files — context window saturated, agent performance degrades
+
+These mistakes degrade agent performance **silently**. No error is thrown. The agent just produces subtly wrong output.
+
+## Examples of Errors Caught
+
+**Missing required sections:**
+```
+$ spec-linter check my-project/CLAUDE.md
+
+my-project/CLAUDE.md
+  error  Missing required section: "Project Overview"  (S001)
+  error  Missing required section: "Acceptance Criteria"  (S001)
+
+2 error(s), 0 warning(s)
+```
+
+**Accidentally committed secret:**
+```
+$ spec-linter check my-project/CLAUDE.md
+
+my-project/CLAUDE.md
+  :15 error  Possible OpenAI/Anthropic API key detected. Remove before committing.  (S003)
+
+1 error(s), 0 warning(s)
+```
+
+**Wildcard tool permissions:**
+```
+$ spec-linter check my-project/CLAUDE.md
+
+my-project/CLAUDE.md
+  :42 error  Wildcard tool permission (Tool(*:*)) — use explicit tool names instead of wildcards.  (S005)
+
+1 error(s), 0 warning(s)
+```
+
 ## Installation
 
 ```bash
