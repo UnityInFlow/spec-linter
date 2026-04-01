@@ -10,8 +10,9 @@ jobs:
   build-and-test:
     strategy:
       matrix:
+        runner: [arc-runner-unityinflow, orangepi]
         node-version: [18, 20]
-    runs-on: self-hosted
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
