@@ -1,14 +1,14 @@
-import { ParsedSpecFile, Section } from './types.js';
+import { ParsedSpecFile, Section } from "./types.js";
 
 export function parseSpecFile(path: string, raw: string): ParsedSpecFile {
-  const lines = raw.split('\n');
+  const lines = raw.split("\n");
   const sections: Section[] = [];
   let inCodeBlock = false;
 
   for (let index = 0; index < lines.length; index++) {
     const line = lines[index];
 
-    if (line.startsWith('```')) {
+    if (line.startsWith("```")) {
       inCodeBlock = !inCodeBlock;
       continue;
     }
@@ -21,10 +21,10 @@ export function parseSpecFile(path: string, raw: string): ParsedSpecFile {
         heading: headingMatch[2].trim(),
         level: headingMatch[1].length,
         line: index + 1,
-        content: '',
+        content: "",
       });
     } else if (sections.length > 0) {
-      sections[sections.length - 1].content += line + '\n';
+      sections[sections.length - 1].content += line + "\n";
     }
   }
 
@@ -36,6 +36,6 @@ export function parseSpecFile(path: string, raw: string): ParsedSpecFile {
     path,
     raw,
     sections,
-    sizeBytes: Buffer.byteLength(raw, 'utf-8'),
+    sizeBytes: Buffer.byteLength(raw, "utf-8"),
   };
 }

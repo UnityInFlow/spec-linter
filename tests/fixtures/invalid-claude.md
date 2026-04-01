@@ -13,4 +13,4 @@ GITHUB_TOKEN=ghp_abcdefghijklmnopqrstuvwxyz1234567890
 
 This is a duplicate heading.
 
-Bash(*:*)
+Bash(_:_)
